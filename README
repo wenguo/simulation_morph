@@ -1,0 +1,9 @@
+Simulation code for morphogenesis in the SYMBRION project
+
+1. compiling
+   cd build
+   make
+   make install
+
+2. run
+   stage world/xxx.world
