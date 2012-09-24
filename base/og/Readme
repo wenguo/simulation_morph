@@ -1,0 +1,4 @@
+1. fltk is required for visualisation
+2. extract galib247, then "make & make install"
+3. use mouse/keyboard to zoom in/out or move the canvas
+4. use Tab key or key[a-g] to change test functions

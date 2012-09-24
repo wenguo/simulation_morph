@@ -1,0 +1,63 @@
+#first world
+
+include "symbrion.inc"
+include "map.inc"
+include "power_sockets.inc"
+
+
+interval_sim 100
+speedup 1.000
+
+resolution 0.005
+
+threads 0
+
+paused 1
+
+#quit_time 2
+
+window
+(
+   size [626.000 660.000]
+
+   #camera
+   center [0.137 0.077]
+   rotate [0 0]
+   scale 368.423
+
+   #perspective camera options
+   pcam_loc [0.722 -0.201 0.300]
+   pcam_angle [52.000 0]
+
+   #GUI options
+   show_data 1
+   pcam_on 0
+   screenshots 0
+
+)
+
+# load an environment bitmap
+floorplan
+( 
+  name "brl"
+  color "PalTurquoise4"
+  size [3.200 3.200 0.100]
+  pose [0 0 0 0]
+  bitmap "arena.png"
+)
+
+
+#epuck(name "r1" pose [ 0 0 0 0 ] ctrl "libepuck")
+
+
+robot_kit(	name "r0" pose [-0.067 0.380 0 -7.698]		 )
+robot_kit(	name "r1" pose [0.003 -0.363 0 -105.286]		 )
+robot_kit(	name "r2" pose [0.314 0.179 0 -140.843]		 )
+robot_kit(	name "r3" pose [0.362 0.380 0 -33.757]		 )
+robot_kit(	name "r4" pose [-0.074 -0.238 0 -104.151]		 )
+robot_kit(	name "r5" pose [0.127 0.186 0 143.142]		 )
+robot_kit(	name "r6" pose [0.347 -0.055 0 0.831] joules 400)
+power_socket(   name "s1" color "IndianRed" pose [0.900 0 0 180] )
+power_socket(   name "s2" color "NavyBlue"  pose [0.900 0.500 0 180] )
+power_socket(   name "s3" color "gold"  pose [0.900 -0.500 0 180] )
+

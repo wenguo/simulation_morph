@@ -1,0 +1,162 @@
+#first world
+
+include "symbrion.inc"
+include "map.inc"
+include "power_sockets.inc"
+
+
+interval_sim 100
+speedup 10.00
+
+resolution 0.002
+
+threads 40
+paused 1
+
+
+quit_time 72000
+
+window
+(
+   size [800.000 800.000]
+
+   #camera
+   center [0.0 0.0]
+   rotate [0 0]
+   scale 120
+
+   #perspective camera options
+#pcam_loc [-0.303 -1.636 0.800]
+   pcam_loc [-0.326 -1.625 0.800]
+   pcam_angle [49.000 -8.000]
+
+   #GUI options
+   show_data 0
+   show_grid 1
+   show_blocks 1
+   show_flags 0
+   pcam_on 0
+   screenshots 0
+
+)
+
+# load an environment bitmap
+floorplan
+( 
+  color "DimGray"
+  name "brl"
+  size [6.1200 6.1200 0.500]
+  pose [0 0 0 0]
+  bitmap "arena.png"
+  blob_return 1
+  obstacle_return 1
+  ranger_return 4
+)
+
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+robot_kit(	name "" pose [2.1 -20.1 0 0]	 )
+
+power_socket(name "s1" pose [3.048 0 0 0])
+power_socket(name "s2" pose [0 3.048 0 90])
+power_socket(name "s3" pose [-3.048 0 0 180])
+power_socket(name "s4" pose [0 -3.048 0 -90])
+#powersocket_on_base(pose [3 3 0.0 0])
+#powersocket_on_column(pose [0 2 0 0])

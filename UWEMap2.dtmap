@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="delta3dMap" xsi:schemaLocation="delta3dMap map.xsd">
+    <header>
+        <name>UWEMap2</name>
+        <description></description>
+        <author></author>
+        <comment></comment>
+        <copyright></copyright>
+        <createTimestamp>2006-04-17T12:09:25.0-06:00</createTimestamp>
+        <lastUpdateTimestamp>2012-01-09T17:21:24+00:00</lastUpdateTimestamp>
+        <editorVersion>2.7.2</editorVersion>
+        <schemaVersion>1.0</schemaVersion>
+    </header>
+    <libraries></libraries>
+    <actors>
+        <actor>
+            <type>dtcore.Static Mesh</type>
+            <id>0efc65c1-2b97-4a9d-a6a8-c243656cac19</id>
+            <name>StaticMesh_11</name>
+            <property>
+                <name>Translation</name>
+                <vec3>
+                    <value1>0.000000</value1>
+                    <value2>112.000000</value2>
+                    <value3>0.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>Scale</name>
+                <vec3>
+                    <value1>28.000000</value1>
+                    <value2>1.000000</value2>
+                    <value3>3.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>static mesh</name>
+                <resourceType>StaticMeshes</resourceType>
+                <resourceDisplayName>StaticMeshes:wallX.3ds</resourceDisplayName>
+                <resource>StaticMeshes:wallX.3ds</resource>
+            </property>
+        </actor>
+        <actor>
+            <type>dtcore.Static Mesh</type>
+            <id>33338676-25fd-4a1d-a262-3bb82ce20b2a</id>
+            <name>StaticMesh_22</name>
+            <property>
+                <name>Translation</name>
+                <vec3>
+                    <value1>25.500000</value1>
+                    <value2>14.000000</value2>
+                    <value3>0.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>Scale</name>
+                <vec3>
+                    <value1>1.000000</value1>
+                    <value2>24.000000</value2>
+                    <value3>2.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>static mesh</name>
+                <resourceType>StaticMeshes</resourceType>
+                <resourceDisplayName>StaticMeshes:wallY.3ds</resourceDisplayName>
+                <resource>StaticMeshes:wallY.3ds</resource>
+            </property>
+        </actor>
+        <actor>
+            <type>dtcore.Static Mesh</type>
+            <id>348d2d66-3dbf-4677-839c-bd3ae4a2dcfc</id>
+            <name>StaticMesh_09</name>
+            <property>
+                <name>Collision Type</name>
+                <enumerated>MESH</enumerated>
+            </property>
+            <property>
+                <name>Enable Collision</name>
+                <boolean>true</boolean>
+            </property>
+            <property>
+                <name>static mesh</name>
+                <resourceType>StaticMeshes</resourceType>
+                <resourceDisplayName>StaticMeshes::flatdirt.ive</resourceDisplayName>
+                <resource>StaticMeshes::flatdirt.ive</resource>
+            </property>
+        </actor>
+        <actor>
+            <type>dtcore.Static Mesh</type>
+            <id>3cb3e933-ffe3-4ef2-9e5b-e63e5aec7473</id>
+            <name>StaticMesh_19</name>
+            <property>
+                <name>Translation</name>
+                <vec3>
+                    <value1>-100.000000</value1>
+                    <value2>-100.000000</value2>
+                    <value3>0.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>Collision Type</name>
+                <enumerated>MESH</enumerated>
+            </property>
+            <property>
+                <name>Enable Collision</name>
+                <boolean>true</boolean>
+            </property>
+            <property>
+                <name>static mesh</name>
+                <resourceType>StaticMeshes</resourceType>
+                <resourceDisplayName>StaticMeshes::flatdirt.ive</resourceDisplayName>
+                <resource>StaticMeshes::flatdirt.ive</resource>
+            </property>
+        </actor>
+        <actor>
+            <type>dtcore.Static Mesh</type>
+            <id>47d31fc6-b31e-4470-a696-7c4f2d95f404</id>
+            <name>StaticMesh_16</name>
+            <property>
+                <name>Translation</name>
+                <vec3>
+                    <value1>-100.000000</value1>
+                    <value2>100.000000</value2>
+                    <value3>0.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>Collision Type</name>
+                <enumerated>MESH</enumerated>
+            </property>
+            <property>
+                <name>Enable Collision</name>
+                <boolean>true</boolean>
+            </property>
+            <property>
+                <name>static mesh</name>
+                <resourceType>StaticMeshes</resourceType>
+                <resourceDisplayName>StaticMeshes::flatdirt.ive</resourceDisplayName>
+                <resource>StaticMeshes::flatdirt.ive</resource>
+            </property>
+        </actor>
+        <actor>
+            <type>dtcore.Static Mesh</type>
+            <id>59fd0178-aa0b-47b3-ba43-265835627893</id>
+            <name>StaticMesh_13</name>
+            <property>
+                <name>Translation</name>
+                <vec3>
+                    <value1>-112.000000</value1>
+                    <value2>0.000000</value2>
+                    <value3>0.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>Scale</name>
+                <vec3>
+                    <value1>1.000000</value1>
+                    <value2>28.000000</value2>
+                    <value3>3.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>static mesh</name>
+                <resourceType>StaticMeshes</resourceType>
+                <resourceDisplayName>StaticMeshes:wallY.3ds</resourceDisplayName>
+                <resource>StaticMeshes:wallY.3ds</resource>
+            </property>
+        </actor>
+        <actor>
+            <type>dtcore.Static Mesh</type>
+            <id>5edb880f-af9d-4ae9-8392-117222d5aa0f</id>
+            <name>StaticMesh_23</name>
+            <property>
+                <name>Translation</name>
+                <vec3>
+                    <value1>-42.000000</value1>
+                    <value2>0.000000</value2>
+                    <value3>0.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>Scale</name>
+                <vec3>
+                    <value1>17.150000</value1>
+                    <value2>1.000000</value2>
+                    <value3>3.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>static mesh</name>
+                <resourceType>StaticMeshes</resourceType>
+                <resourceDisplayName>StaticMeshes:wallX.3ds</resourceDisplayName>
+                <resource>StaticMeshes:wallX.3ds</resource>
+            </property>
+        </actor>
+        <actor>
+            <type>dtcore.Static Mesh</type>
+            <id>74b2e971-16b0-428f-9d38-58a4d0b25358</id>
+            <name>StaticMesh_12</name>
+            <property>
+                <name>Translation</name>
+                <vec3>
+                    <value1>112.000000</value1>
+                    <value2>0.000000</value2>
+                    <value3>0.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>Scale</name>
+                <vec3>
+                    <value1>1.000000</value1>
+                    <value2>28.000000</value2>
+                    <value3>3.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>static mesh</name>
+                <resourceType>StaticMeshes</resourceType>
+                <resourceDisplayName>StaticMeshes:wallY.3ds</resourceDisplayName>
+                <resource>StaticMeshes:wallY.3ds</resource>
+            </property>
+        </actor>
+        <actor>
+            <type>dtcore.Static Mesh</type>
+            <id>9ea279b5-ef6e-4e95-b066-f9d0595d5a63</id>
+            <name>StaticMesh_10</name>
+            <property>
+                <name>Translation</name>
+                <vec3>
+                    <value1>0.000000</value1>
+                    <value2>-112.000000</value2>
+                    <value3>0.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>Scale</name>
+                <vec3>
+                    <value1>28.000000</value1>
+                    <value2>1.000000</value2>
+                    <value3>3.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>static mesh</name>
+                <resourceType>StaticMeshes</resourceType>
+                <resourceDisplayName>StaticMeshes:wallX.3ds</resourceDisplayName>
+                <resource>StaticMeshes:wallX.3ds</resource>
+            </property>
+        </actor>
+        <actor>
+            <type>dtcore.Static Mesh</type>
+            <id>a3b5730a-7e04-465e-8e7e-80b2603b77d9</id>
+            <name>StaticMesh_15</name>
+            <property>
+                <name>Translation</name>
+                <vec3>
+                    <value1>-100.000000</value1>
+                    <value2>0.000000</value2>
+                    <value3>0.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>Collision Type</name>
+                <enumerated>MESH</enumerated>
+            </property>
+            <property>
+                <name>Enable Collision</name>
+                <boolean>true</boolean>
+            </property>
+            <property>
+                <name>static mesh</name>
+                <resourceType>StaticMeshes</resourceType>
+                <resourceDisplayName>StaticMeshes::flatdirt.ive</resourceDisplayName>
+                <resource>StaticMeshes::flatdirt.ive</resource>
+            </property>
+        </actor>
+        <actor>
+            <type>dtcore.Static Mesh</type>
+            <id>aeb83ba6-8283-4b82-a6a1-60742a07d0a3</id>
+            <name>StaticMesh_18</name>
+            <property>
+                <name>Translation</name>
+                <vec3>
+                    <value1>0.000000</value1>
+                    <value2>100.000000</value2>
+                    <value3>0.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>Collision Type</name>
+                <enumerated>MESH</enumerated>
+            </property>
+            <property>
+                <name>Enable Collision</name>
+                <boolean>true</boolean>
+            </property>
+            <property>
+                <name>static mesh</name>
+                <resourceType>StaticMeshes</resourceType>
+                <resourceDisplayName>StaticMeshes::flatdirt.ive</resourceDisplayName>
+                <resource>StaticMeshes::flatdirt.ive</resource>
+            </property>
+        </actor>
+        <actor>
+            <type>dtcore.Lights.Infinite Light</type>
+            <id>cd162ae0-9b80-4db7-b740-a1bfdd8cb74a</id>
+            <name>defaultInfiniteLight_01</name>
+            <property>
+                <name>Enable</name>
+                <boolean>true</boolean>
+            </property>
+            <property>
+                <name>LightNum</name>
+                <integer>1</integer>
+            </property>
+            <property>
+                <name>Ambient</name>
+                <colorRGBA>
+                    <valueR>1.000000</valueR>
+                    <valueG>1.000000</valueG>
+                    <valueB>1.000000</valueB>
+                    <valueA>-0.000000</valueA>
+                </colorRGBA>
+            </property>
+            <property>
+                <name>Diffuse</name>
+                <colorRGBA>
+                    <valueR>0.000000</valueR>
+                    <valueG>0.000000</valueG>
+                    <valueB>0.000000</valueB>
+                    <valueA>0.000000</valueA>
+                </colorRGBA>
+            </property>
+            <property>
+                <name>Specular</name>
+                <colorRGBA>
+                    <valueR>1.000000</valueR>
+                    <valueG>1.000000</valueG>
+                    <valueB>1.000000</valueB>
+                    <valueA>0.000000</valueA>
+                </colorRGBA>
+            </property>
+            <property>
+                <name>Rotation</name>
+                <vec3>
+                    <value1>45.000000</value1>
+                    <value2>-180.000000</value2>
+                    <value3>0.000000</value3>
+                </vec3>
+            </property>
+        </actor>
+        <actor>
+            <type>dtcore.Static Mesh</type>
+            <id>d24e1208-8a4f-45f6-8e8f-6c6d8fb8d7cf</id>
+            <name>StaticMesh_14</name>
+            <property>
+                <name>Translation</name>
+                <vec3>
+                    <value1>100.000000</value1>
+                    <value2>0.000000</value2>
+                    <value3>0.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>Collision Type</name>
+                <enumerated>MESH</enumerated>
+            </property>
+            <property>
+                <name>Enable Collision</name>
+                <boolean>true</boolean>
+            </property>
+            <property>
+                <name>static mesh</name>
+                <resourceType>StaticMeshes</resourceType>
+                <resourceDisplayName>StaticMeshes::flatdirt.ive</resourceDisplayName>
+                <resource>StaticMeshes::flatdirt.ive</resource>
+            </property>
+        </actor>
+        <actor>
+            <type>dtcore.Static Mesh</type>
+            <id>d76751d2-1822-47a3-a4d4-ba3032045500</id>
+            <name>StaticMesh_20</name>
+            <property>
+                <name>Translation</name>
+                <vec3>
+                    <value1>0.000000</value1>
+                    <value2>-100.000000</value2>
+                    <value3>0.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>Collision Type</name>
+                <enumerated>MESH</enumerated>
+            </property>
+            <property>
+                <name>Enable Collision</name>
+                <boolean>true</boolean>
+            </property>
+            <property>
+                <name>static mesh</name>
+                <resourceType>StaticMeshes</resourceType>
+                <resourceDisplayName>StaticMeshes::flatdirt.ive</resourceDisplayName>
+                <resource>StaticMeshes::flatdirt.ive</resource>
+            </property>
+        </actor>
+        <actor>
+            <type>dtcore.Static Mesh</type>
+            <id>ec926a2e-e540-421b-9dd0-24a341b10096</id>
+            <name>StaticMesh_17</name>
+            <property>
+                <name>Translation</name>
+                <vec3>
+                    <value1>100.000000</value1>
+                    <value2>100.000000</value2>
+                    <value3>0.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>Collision Type</name>
+                <enumerated>MESH</enumerated>
+            </property>
+            <property>
+                <name>Enable Collision</name>
+                <boolean>true</boolean>
+            </property>
+            <property>
+                <name>static mesh</name>
+                <resourceType>StaticMeshes</resourceType>
+                <resourceDisplayName>StaticMeshes::flatdirt.ive</resourceDisplayName>
+                <resource>StaticMeshes::flatdirt.ive</resource>
+            </property>
+        </actor>
+        <actor>
+            <type>dtcore.Static Mesh</type>
+            <id>f29e8229-c741-487c-b24f-1022ea97f6d6</id>
+            <name>StaticMesh_21</name>
+            <property>
+                <name>Translation</name>
+                <vec3>
+                    <value1>100.000000</value1>
+                    <value2>-100.000000</value2>
+                    <value3>0.000000</value3>
+                </vec3>
+            </property>
+            <property>
+                <name>Collision Type</name>
+                <enumerated>MESH</enumerated>
+            </property>
+            <property>
+                <name>Enable Collision</name>
+                <boolean>true</boolean>
+            </property>
+            <property>
+                <name>static mesh</name>
+                <resourceType>StaticMeshes</resourceType>
+                <resourceDisplayName>StaticMeshes::flatdirt.ive</resourceDisplayName>
+                <resource>StaticMeshes::flatdirt.ive</resource>
+            </property>
+        </actor>
+    </actors>
+    <groups></groups>
+    <drawablehierarchy></drawablehierarchy>
+    <presetCameras></presetCameras>
+</map>
