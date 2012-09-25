@@ -41,6 +41,8 @@ class Robot3dRobot:public Robot, public HAL
         virtual void Docking();
         virtual void InOrganism();
         virtual void Disassembly();
+        virtual void Undocking();
+        virtual void Reshaping();
         virtual void Recruitment();
         virtual void MacroLocomotion();
 

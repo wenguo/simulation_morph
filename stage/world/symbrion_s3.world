@@ -32,7 +32,7 @@ window
 
    #GUI options
    show_data 0
-   show_grid 1
+   show_grid 0
    show_blocks 1
    show_flags 0
    show_status 0

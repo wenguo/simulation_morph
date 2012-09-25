@@ -293,11 +293,8 @@ void StageRobot::Seeding()
 
     double f1 = para->K1 * S_o * seeding_count + para->K2 * (S_r + S_l) - para->K3 * S_s;
 
-    //printf("%d -- %s (f1:%.1f\tSo:%.1f\tSr:%.1f\tSl:%.1f\tSs:%.1f)\n", timestamp, name, f1, S_o, S_r, S_l, S_s);
-#define TEMP_MOVIE
-#ifndef  TEMP_MOVIE
+   // printf("%d -- %s (f1:%.1f\tSo:%.1f\tSr:%.1f\tSl:%.1f\tSs:%.1f)\n", timestamp, name, f1, S_o, S_r, S_l, S_s);
     if( f1 > para->S1)
-#endif
     {
         mytree.Clear();
 #ifdef PREDEFINED_SHAPES
@@ -377,7 +374,6 @@ void StageRobot::Seeding()
         com_bus->addCommunicationNode(this);
         com_bus->printNodeList();
     }
-#ifndef TEMP_MOVIE 
     else if( f1 < para->S2 || seeding_count > para->T_s)
     {
         printf("%d -- %s failed\n", timestamp, name);
@@ -386,7 +382,6 @@ void StageRobot::Seeding()
         foraging_blind_count = DEFAULT_FORAGING_BLIND_COUNT;
         EnableBlobfinder(false);
     }
-#endif
     return;
 
 }
@@ -456,6 +451,7 @@ void StageRobot::Foraging()
     {
         if(bumped & 0x81)
         {
+            printf("%d %s bumped to something\n", timestamp, name);
             Vb = powersource_blob_hist.Avg() / (para->V_max * 1.0);// blob_size[BLOB_POWERSOCKET]/(para->V_max * 1.0);
             Es = powerpack->ProportionRemaining();
 
@@ -471,6 +467,7 @@ void StageRobot::Foraging()
             seeding_count = 0;
             current_state = SEEDING;
             last_state = FORAGING;
+            printf("S_o : %.2f\n", S_o);
         }
         else
             ;//keep going
@@ -854,7 +851,6 @@ void StageRobot::InOrganism()
                     {
                         current_state = RECRUITMENT;
                         last_state = INORGANISM;
-
                     }
 
                 }
@@ -954,6 +950,59 @@ void StageRobot::InOrganism()
 
 void StageRobot::Disassembly()
 {
+    printf("%d: %s in Disassembly\n", timestamp, name);
+    for(int i = 0; i< SIDE_COUNT; i++)
+    {
+        if(docked[i] && neighbour_message[i] && neighbour_message[i]->type == MSG_TYPE_UNDOCKED
+                && neighbour_message[i]->timestamp < timestamp)
+        {
+            std::cout<<ClockString()<<" : "<<name<<" received undocking message via Channel "<<side_names[i]<<std::endl;
+            delete neighbour_message[i];
+            neighbour_message[i]=NULL;
+            docking_units[i]->SetActive(true);
+            docking_units[i]->CommandOpen();
+            docked[i]=false;
+            neighbours[i]=NULL;
+        }
+
+    }
+
+    //check how many robots are connected to me
+    int num_docked = 0;
+    for(int i = 0; i< SIDE_COUNT; i++)
+    {
+        if (docked[i]==true)
+            num_docked++;
+    }
+
+    //if only one robot or no robot is connected, then it is safe to undock from the robot I connect to
+    if (num_docked <= 1)
+    {
+        for (int i = 0; i < SIDE_COUNT; i++)
+        {
+            if (docked[i]==true)
+            {
+                docking_units[i]->SetActive(true);
+                docking_units[i]->CommandOpen();
+                break;
+            }
+        }
+
+        undocking_count = DEFAULT_UNDOCKING_COUNT;
+        current_state = UNDOCKING;
+        last_state = DISASSEMBLY;
+    }
+
+    draw_organism = false;
+}
+
+void StageRobot::Undocking()
+{
+    printf("%d : %s in Undocking state\n", timestamp, name);
+}
+
+void StageRobot::Reshaping()
+{
 }
 
 void StageRobot::Recruitment()
@@ -1036,8 +1085,39 @@ void StageRobot::Recruitment()
                 robot_in_range_replied &= ~(1<<index);
 
             recruitment_count[index]++;
+
+            //no robot docked for a long time
+            if ( f3(it1->Edges(), recruitment_count[index]) - para->S3 > 1e-6)
+            {
+                //stop flashing, be prepared for undocking
+                //disable all connector_return
+                for(int i=0;i<SIDE_COUNT;i++)
+                {
+                    docking_units[i]->SetConnectorReturn(false);
+                    //if(!docked[i] && (recruitment_channel & (1<<i)))
+                    {
+                        leds[i]->EnableLight(false);
+                        docking_units[i]->SetActive(false); //no longer needs to update beam and contact of connector
+                        docking_units[i]->SetConnectorReturn(false);
+                        docking_units[i]->CommandOpen();
+                    }
+                }
+
+
+                current_mode = SWARM;
+                current_state = DISASSEMBLY;
+                last_state = RECRUITMENT;
+                robot_in_range_replied = 0;
+
+                //send message to docked robot, tell them to disassembly 
+                BroadcastMessage(Message(name, "ALL", MSG_TYPE_BROADCAST, MSG_DISASSEMBLY,timestamp));
+
+                //      pos->GetWorld()->Stop();
+
+                return;
+            }
             //no robot in range replied?
-            if ((timestamp % RECRUITMENT_SIGNAL_INTERVAL == index) && ((~robot_in_range_replied) & (1<<index)))
+            else if ((timestamp % RECRUITMENT_SIGNAL_INTERVAL == index) && ((~robot_in_range_replied) & (1<<index)))
             {
                 BroadcastIRMessage(index, IR_MSG_TYPE_RECRUITING, it1->getSymbol(0).data);
                 recruitment_signal_interval_count[index] = DEFAULT_RECRUITMENT_COUNT;

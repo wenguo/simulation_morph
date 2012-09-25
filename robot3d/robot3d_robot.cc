@@ -248,6 +248,14 @@ void Robot3dRobot::Disassembly()
 {
 }
 
+void Robot3dRobot::Undocking()
+{
+}
+
+void Robot3dRobot::Reshaping()
+{
+}
+
 void Robot3dRobot::Recruitment()
 {
 }

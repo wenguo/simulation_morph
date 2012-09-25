@@ -21,6 +21,8 @@ const char* state_names[STATE_COUNT]={
     "Docking",
     "Disassembly",
     "InOrganism",
+    "Undocking",
+    "Reshaping",
     "Recruitment",
     "MacroLocomotion"
 };
@@ -75,6 +77,8 @@ Robot::Robot():
     RegisterBehaviour(&Robot::Docking, DOCKING);
     RegisterBehaviour(&Robot::InOrganism, INORGANISM);
     RegisterBehaviour(&Robot::Disassembly, DISASSEMBLY);
+    RegisterBehaviour(&Robot::Undocking, UNDOCKING);
+    RegisterBehaviour(&Robot::Reshaping, RESHAPING);
     RegisterBehaviour(&Robot::Recruitment, RECRUITMENT);
     RegisterBehaviour(&Robot::MacroLocomotion, MACROLOCOMOTION);
 
@@ -224,6 +228,15 @@ void Robot::InOrganism()
 void Robot::Disassembly()
 {
 }
+
+void Robot::Undocking()
+{
+}
+
+void Robot::Reshaping()
+{
+}
+
 void Robot::Recruitment()
 {
 }

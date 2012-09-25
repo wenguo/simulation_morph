@@ -54,7 +54,7 @@ namespace Morph
 #define MSG_RESHAPING        "Reshaping"
 
 
-    enum fsm_state_t {EXPLORING = 0, RESTING, SEEDING, FORAGING, ASSEMBLY, LOCATEENERGY, LOCATEBEACON, ALIGNMENT, RECOVER, DOCKING, DISASSEMBLY, INORGANISM, RECRUITMENT, MACROLOCOMOTION, STATE_COUNT};
+    enum fsm_state_t {EXPLORING = 0, RESTING, SEEDING, FORAGING, ASSEMBLY, LOCATEENERGY, LOCATEBEACON, ALIGNMENT, RECOVER, DOCKING, DISASSEMBLY, UNDOCKING, RESHAPING, INORGANISM, RECRUITMENT, MACROLOCOMOTION, STATE_COUNT};
     extern const char* state_names[STATE_COUNT];
     enum robot_mode_t {SWARM, ORGANISM};
     enum ir_pos_t {FR=0, RF, RB, BR, BL, LB, LF, FL}; //F -- FRONT, R -- RIGHT, B-- BACK, L--LEFT
@@ -105,6 +105,8 @@ namespace Morph
         virtual void Docking();
         virtual void InOrganism();
         virtual void Disassembly();
+        virtual void Undocking();
+        virtual void Reshaping();
         virtual void Recruitment();
         virtual void MacroLocomotion();
 
@@ -139,6 +141,8 @@ namespace Morph
         static void Docking(Robot * robot){robot->Docking();}
         static void InOrganism(Robot * robot){robot->InOrganism();}
         static void Disassembly(Robot * robot){robot->Disassembly();}
+        static void Undocking(Robot * robot){robot->Undocking();}
+        static void Reshaping(Robot * robot){robot->Reshaping();}
         static void Recruitment(Robot * robot){robot->Recruitment();}
         static void MacroLocomotion(Robot * robot){robot->MacroLocomotion();}
         int RegisterBehaviour(robot_callback_t fnp, fsm_state_t state);
