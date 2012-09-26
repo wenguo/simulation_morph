@@ -20,9 +20,9 @@ const char* state_names[STATE_COUNT]={
     "Recover",
     "Docking",
     "Disassembly",
-    "InOrganism",
     "Undocking",
     "Reshaping",
+    "InOrganism",
     "Recruitment",
     "MacroLocomotion"
 };
@@ -334,7 +334,7 @@ void Robot::SendMessage(int channel, Message * msg)
                 delete neighbours[channel]->neighbour_message[i];
 
             neighbours[channel]->neighbour_message[i]=msg;
-//            std::cout<<timestamp<<" : "<<*msg<<std::endl;
+            std::cout<<timestamp<<" : "<<*msg<<std::endl;
             break;
         }
     }

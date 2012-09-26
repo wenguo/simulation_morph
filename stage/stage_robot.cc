@@ -415,6 +415,7 @@ void StageRobot::Recover()
     else
     {
         current_state = FORAGING;
+        last_state = RECOVER;
 
         foraging_blind_count = DEFAULT_FORAGING_BLIND_COUNT;
         EnableBlobfinder(false);
@@ -857,6 +858,7 @@ void StageRobot::InOrganism()
             }
             else if(neighbour_message[i]->type == MSG_TYPE_UNDOCKED)
             {
+                printf("%d: %s message undocked recived from side %c\n", timestamp, name, i);
                 ;//to be implemented
             }
         
@@ -998,11 +1000,76 @@ void StageRobot::Disassembly()
 
 void StageRobot::Undocking()
 {
-    printf("%d : %s in Undocking state\n", timestamp, name);
+
+    printf("%d: %s in Undocking\n", timestamp, name);
+    //tick the clock, wait until the docking unit is fully opened
+    undocking_count--;
+
+    if (undocking_count == 0)
+    {
+        for(int i=0; i< SIDE_COUNT; i++)
+        {
+            if (docked[i]==true)
+            {
+                std::cout<<ClockString()<<" : "<<name<<" send undocking message via channel "<< side_names[i]<<std::endl ;
+                // ircomms[i]->Transmit(MSG_UNDOCKED);
+                SendMessage(i, new Message(name, neighbours[i]->name, MSG_TYPE_UNDOCKED,"Undocked", timestamp));
+                docking_units[i]->SetActive(false);
+                docked[i] = false;
+                neighbours[i] = NULL;
+                break;
+            }
+        }
+
+        EnableLightDetector(true);
+        EnableProximitySensor(true);
+
+        //no blobfinder for seed robot again
+        if(!seed)
+            EnableBlobfinder(true);
+
+        current_state = RECOVER;
+        last_state = UNDOCKING;
+        recover_count = DEFAULT_RECOVER_COUNT;
+        organism_found = false;
+
+        shape_completed = false;
+        organism_formed = false;
+
+        pos->SetObstacleReturn(0);
+
+        docking_done_syn = false;
+
+        //CommunicationBus::getInstance().removeCommunicationNode(this);
+        //CommunicationBus::getInstance().printNodeList();
+        if(com_bus)
+        {
+            com_bus->removeCommunicationNode(this);
+            com_bus->printNodeList();
+            //TODO: remove com_bus from com manager
+            if(com_bus->CommunicationNodeList.empty())
+                delete com_bus;
+            com_bus = NULL;
+        }
+
+
+        //clean all organism info
+        //if(og)
+        //{
+        //    delete og;
+        //    og = NULL;
+        //}
+        mytree.Clear();
+        mybranches.clear();
+
+        seed = false;
+       
+    }
 }
 
 void StageRobot::Reshaping()
 {
+    //To be implemented
 }
 
 void StageRobot::Recruitment()
@@ -1138,6 +1205,46 @@ void StageRobot::Recruitment()
         //send organism info to robot3d
         IPCSendOrganismInfo();
     }
+
+
+ //check if there is something broadcast message, should have only one message, otherwise, errors
+    while(!blackboard.empty())
+    {
+        Message * message = blackboard.back(); //it is a bit dangerous, since other process can push_back its blackboard
+        if(message && message->timestamp < timestamp)
+        {
+            switch(message->type)
+            {
+                case MSG_TYPE_BROADCAST:
+                    if (strcmp((char*)message->data,MSG_DISASSEMBLY) == 0)
+                    {
+                        current_state = DISASSEMBLY;
+                        last_state = RECRUITMENT;
+                        current_mode = SWARM;
+                        organism_found = false;
+                        organism_formed = false;
+                        num_robots_inorganism = 1;
+
+                        //disable all connector_return
+                        for(int i=0; i< SIDE_COUNT; i++)
+                        {
+                            leds[i]->EnableLight(false);
+                            docking_units[i]->SetActive(false); //no longer needs to update beam and contact of connector
+                            docking_units[i]->SetConnectorReturn(false);
+                            docking_units[i]->CommandOpen();
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+            delete message;
+            blackboard.pop_back();
+        }
+        else
+            break;
+    }
+
 }
 
 void StageRobot::MacroLocomotion()
