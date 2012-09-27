@@ -952,7 +952,7 @@ void StageRobot::InOrganism()
 
 void StageRobot::Disassembly()
 {
-    printf("%d: %s in Disassembly\n", timestamp, name);
+    //printf("%d: %s in Disassembly\n", timestamp, name);
     for(int i = 0; i< SIDE_COUNT; i++)
     {
         if(docked[i] && neighbour_message[i] && neighbour_message[i]->type == MSG_TYPE_UNDOCKED
@@ -1000,8 +1000,7 @@ void StageRobot::Disassembly()
 
 void StageRobot::Undocking()
 {
-
-    printf("%d: %s in Undocking\n", timestamp, name);
+    //printf("%d: %s in Undocking\n", timestamp, name);
     //tick the clock, wait until the docking unit is fully opened
     undocking_count--;
 
@@ -1063,7 +1062,7 @@ void StageRobot::Undocking()
         mybranches.clear();
 
         seed = false;
-       
+
     }
 }
 
@@ -1156,6 +1155,8 @@ void StageRobot::Recruitment()
             //no robot docked for a long time
             if ( f3(it1->Edges(), recruitment_count[index]) - para->S3 > 1e-6)
             {
+
+                recruitment_count[index]=0;
                 //stop flashing, be prepared for undocking
                 //disable all connector_return
                 for(int i=0;i<SIDE_COUNT;i++)
@@ -1164,7 +1165,7 @@ void StageRobot::Recruitment()
                     //if(!docked[i] && (recruitment_channel & (1<<i)))
                     {
                         leds[i]->EnableLight(false);
-                        docking_units[i]->SetActive(false); //no longer needs to update beam and contact of connector
+                        docking_units[i]->SetActive(true); //no longer needs to update beam and contact of connector
                         docking_units[i]->SetConnectorReturn(false);
                         docking_units[i]->CommandOpen();
                     }
@@ -1178,6 +1179,7 @@ void StageRobot::Recruitment()
 
                 //send message to docked robot, tell them to disassembly 
                 BroadcastMessage(Message(name, "ALL", MSG_TYPE_BROADCAST, MSG_DISASSEMBLY,timestamp));
+                printf("%d : %s broadcast disassembly message\n", timestamp, name);
 
                 //      pos->GetWorld()->Stop();
 
@@ -1229,7 +1231,7 @@ void StageRobot::Recruitment()
                         for(int i=0; i< SIDE_COUNT; i++)
                         {
                             leds[i]->EnableLight(false);
-                            docking_units[i]->SetActive(false); //no longer needs to update beam and contact of connector
+                            docking_units[i]->SetActive(true); //no longer needs to update beam and contact of connector
                             docking_units[i]->SetConnectorReturn(false);
                             docking_units[i]->CommandOpen();
                         }

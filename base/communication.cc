@@ -16,8 +16,18 @@ namespace Morph{
         //log the first node added to the organism
         if(SimulationManager::getInstance()->logFile.is_open())
         {
-            SimulationManager::getInstance()->logFile<<((Robot*)node)->timestamp<<"\t"<<this->bus_id<<
-                "\t"<<this->Size()<<"\t"<<this->expected_size<<std::endl;
+            //SimulationManager::getInstance()->logFile<<((Robot*)node)->timestamp<<"\t"<<this->bus_id<<
+            //    "\t"<<this->Size()<<"\t"<<this->expected_size<<std::endl;
+
+            std::vector<Robot*>::iterator it = CommunicationNodeList.begin();
+            SimulationManager::getInstance()->logFile<<node->timestamp<<"- id: "<<bus_id<<" size: "<<Size()<<" elements:";
+            while (it != CommunicationNodeList.end())
+            {
+             SimulationManager::getInstance()->logFile<< ((Robot*)(*it))->name <<"\t";
+                it++;
+            }
+            SimulationManager::getInstance()->logFile<<std::endl;
+
         }
 
     }
@@ -35,6 +45,24 @@ namespace Morph{
         }
 
         CommunicationNodeList.erase(it);
+
+        //log the first node added to the organism
+        if(SimulationManager::getInstance()->logFile.is_open())
+        {
+            //SimulationManager::getInstance()->logFile<<((Robot*)node)->timestamp<<"\t"<<this->bus_id<<
+            //    "\t"<<this->Size()<<"\t"<<this->expected_size<<std::endl;
+
+            std::vector<Robot*>::iterator it = CommunicationNodeList.begin();
+            SimulationManager::getInstance()->logFile<<node->timestamp<<"- id: "<<bus_id<<" size: "<<Size()<<" elements:";
+            while (it != CommunicationNodeList.end())
+            {
+             SimulationManager::getInstance()->logFile<< ((Robot*)(*it))->name <<"\t";
+                it++;
+            }
+            SimulationManager::getInstance()->logFile<<std::endl;
+
+        }
+
     }
 
     bool CommunicationBus::inNodeList(Robot *node)

@@ -477,8 +477,8 @@ void Robot::Log()
         for(int i=0; i< SIDE_COUNT; i++)
         {
             logFile<<"("<<side_names[i];
-            if(docked[i] && neighbours[i])
-                logFile<<") "<<setw(5)<<neighbours[i]->name<<" | ";
+            if(docked[i])
+                logFile<<") "<<setw(5)<<(neighbours[i]!=NULL?neighbours[i]->name:"NULL")<<" | ";
             else
                 logFile<<") false | ";
         }

@@ -6,7 +6,7 @@ include "power_sockets.inc"
 
 
 interval_sim 100
-speedup 10.00
+speedup 20.00
 
 resolution 0.002
 
