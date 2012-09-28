@@ -23,14 +23,14 @@ const char* state_names[STATE_COUNT]={
     "Undocking",
     "Reshaping",
     "InOrganism",
-    "Recruitment",
+    "Recruiting",
     "MacroLocomotion"
 };
 
 
 Robot::Robot():
     beacon_signals_detected(0),
-    recruitment_signals_detected(0),
+    recruiting_signals_detected(0),
     msg_undocked_received(0),
     msg_reshaping_received(0),
     robot_in_range_replied(0),
@@ -79,7 +79,7 @@ Robot::Robot():
     RegisterBehaviour(&Robot::Disassembly, DISASSEMBLY);
     RegisterBehaviour(&Robot::Undocking, UNDOCKING);
     RegisterBehaviour(&Robot::Reshaping, RESHAPING);
-    RegisterBehaviour(&Robot::Recruitment, RECRUITMENT);
+    RegisterBehaviour(&Robot::Recruiting, RECRUITING);
     RegisterBehaviour(&Robot::MacroLocomotion, MACROLOCOMOTION);
 
     current_state = EXPLORING;
@@ -97,8 +97,8 @@ Robot::Robot():
         comm_status[i] = 0;
         docked[i] = false;
         docking_done[i] = false;
-        recruitment_signal_interval_count[i]=DEFAULT_RECRUITMENT_COUNT;
-        recruitment_count[i]=0;
+        recruiting_signal_interval_count[i]=DEFAULT_RECRUITING_COUNT;
+        recruiting_count[i]=0;
         neighbour_message[i]=NULL;
         neighbours[i]=NULL;
     }
@@ -237,7 +237,7 @@ void Robot::Reshaping()
 {
 }
 
-void Robot::Recruitment()
+void Robot::Recruiting()
 {
 }
 

@@ -168,7 +168,7 @@ void StageRobot::Init(void * mod)
             docking_units[i]->SetParentRobot((void*)this);
         }
 
-        recruitment_count[i] = 0;
+        recruiting_count[i] = 0;
         seeding_shared_info_received[i]=0;
     }
 
@@ -327,11 +327,11 @@ void StageRobot::Seeding()
 
         for(int i=0;i<SIDE_COUNT;i++)
         {
-            recruitment_count[i] = 0;
-            recruitment_signal_interval_count[i] = DEFAULT_RECRUITMENT_COUNT;
+            recruiting_count[i] = 0;
+            recruiting_signal_interval_count[i] = DEFAULT_RECRUITING_COUNT;
         }
 
-        current_state = RECRUITMENT;
+        current_state = RECRUITING;
         last_state = SEEDING;
 
         seed = true;
@@ -374,7 +374,7 @@ void StageRobot::Seeding()
         com_bus->addCommunicationNode(this);
         com_bus->printNodeList();
     }
-    else if( f1 < para->S2 || seeding_count > para->T_s)
+    else if( f1 < para->S2 || seeding_count > para->seeding_time)
     {
         printf("%d -- %s failed\n", timestamp, name);
         current_state = FORAGING;
@@ -497,7 +497,7 @@ void StageRobot::Assembly()
         current_state = FORAGING;
         last_state = ASSEMBLY;
     }
-    //recruitment message recived, then locatebeacon
+    //recruiting message recived, then locatebeacon
     else if (comm_status[0] > 0.8 || comm_status[1] > 0.8 || comm_status[2] > 0.8 || comm_status[3] > 0.8)
     {
         current_state = LOCATEBEACON;
@@ -793,7 +793,7 @@ void StageRobot::InOrganism()
     }
 
     //if received new subtrees from the robot in organism, then transit to state INORGANISM,
-    //this should happen after it send a docking message to the recruitment robot
+    //this should happen after it send a docking message to the recruiting robot
     for(int i=0;i<SIDE_COUNT;i++)
     {
         if (neighbour_message[i] && neighbour_message[i]->timestamp < timestamp)
@@ -840,8 +840,8 @@ void StageRobot::InOrganism()
                         std::cout<<name<<" branch "<<*it<<std::endl;
                         leds[branch_side]->EnableLight(true);
 
-                        recruitment_count[branch_side] = 0;
-                        recruitment_signal_interval_count[branch_side] = DEFAULT_RECRUITMENT_COUNT;
+                        recruiting_count[branch_side] = 0;
+                        recruiting_signal_interval_count[branch_side] = DEFAULT_RECRUITING_COUNT;
 
                         ++it;
 
@@ -850,7 +850,7 @@ void StageRobot::InOrganism()
 
                     if(recruiting_required)
                     {
-                        current_state = RECRUITMENT;
+                        current_state = RECRUITING;
                         last_state = INORGANISM;
                     }
 
@@ -991,7 +991,7 @@ void StageRobot::Disassembly()
             }
 
             //reset some variables TODO: add more here?
-            recruitment_count[i]=0;
+            recruiting_count[i]=0;
             docking_done[i]=0;
             blackboard.clear();
 
@@ -1085,7 +1085,7 @@ void StageRobot::Reshaping()
     //To be implemented
 }
 
-void StageRobot::Recruitment()
+void StageRobot::Recruiting()
 {
     //disable motor
     leftwheel = 0;
@@ -1096,7 +1096,7 @@ void StageRobot::Recruitment()
     if(seed)
     {
         for(int i=0;i<SIDE_COUNT;i++)
-            if(timestamp % RECRUITMENT_SIGNAL_INTERVAL== 4 + 2 * i)
+            if(timestamp % RECRUITING_SIGNAL_INTERVAL== 4 + 2 * i)
                 BroadcastIRMessage(i, MSG_ASSEMBLYSTARTED);
     }
 
@@ -1118,7 +1118,7 @@ void StageRobot::Recruitment()
         //new robot docked?
         if(docking_done[index])
         {
-            recruitment_count[index] = 0;
+            recruiting_count[index] = 0;
             docking_done[index] = false;
             docked[index] = true;
             leds[index]->EnableLight(false);
@@ -1161,13 +1161,13 @@ void StageRobot::Recruitment()
         else
         {
             //reset flags
-            if (recruitment_signal_interval_count[index]-- <= 0)
+            if (recruiting_signal_interval_count[index]-- <= 0)
                 robot_in_range_replied &= ~(1<<index);
 
-            recruitment_count[index]++;
+            recruiting_count[index]++;
 
             //no robot docked for a long time
-            if ( f3(it1->Edges(), recruitment_count[index]) - para->S3 > 1e-6)
+            if ( f3(it1->Edges(), recruiting_count[index]) - para->S3 > 1e-6)
             {
 
                 //stop flashing, be prepared for undocking
@@ -1175,7 +1175,7 @@ void StageRobot::Recruitment()
                 for(int i=0;i<SIDE_COUNT;i++)
                 {
                     docking_units[i]->SetConnectorReturn(false);
-                    //if(!docked[i] && (recruitment_channel & (1<<i)))
+                    //if(!docked[i] && (recruiting_channel & (1<<i)))
                     {
                         leds[i]->EnableLight(false);
                         docking_units[i]->SetActive(true); //no longer needs to update beam and contact of connector
@@ -1187,7 +1187,7 @@ void StageRobot::Recruitment()
 
                 current_mode = SWARM;
                 current_state = DISASSEMBLY;
-                last_state = RECRUITMENT;
+                last_state = RECRUITING;
                 robot_in_range_replied = 0;
 
                 //send message to docked robot, tell them to disassembly 
@@ -1199,21 +1199,21 @@ void StageRobot::Recruitment()
                 return;
             }
             //no robot in range replied?
-            else if ((timestamp % RECRUITMENT_SIGNAL_INTERVAL == index) && ((~robot_in_range_replied) & (1<<index)))
+            else if ((timestamp % RECRUITING_SIGNAL_INTERVAL == index) && ((~robot_in_range_replied) & (1<<index)))
             {
                 BroadcastIRMessage(index, IR_MSG_TYPE_RECRUITING, it1->getSymbol(0).data);
-                recruitment_signal_interval_count[index] = DEFAULT_RECRUITMENT_COUNT;
+                recruiting_signal_interval_count[index] = DEFAULT_RECRUITING_COUNT;
             }
 
             ++it1;
         }
     }
 
-    //recruitment done?
+    //recruiting done?
     if(mybranches.empty())
     {
         current_state = INORGANISM;
-        last_state = RECRUITMENT;
+        last_state = RECRUITING;
         memset(docking_done, 0, NUM_DOCKS);
         robot_in_range_replied = 0;
 
@@ -1234,7 +1234,7 @@ void StageRobot::Recruitment()
                     if (strcmp((char*)message->data,MSG_DISASSEMBLY) == 0)
                     {
                         current_state = DISASSEMBLY;
-                        last_state = RECRUITMENT;
+                        last_state = RECRUITING;
                         current_mode = SWARM;
                         organism_found = false;
                         organism_formed = false;
@@ -1571,13 +1571,13 @@ int StageRobot::IRCommUpdate(Model* mod, StageRobot *robot)
                     {
                         case MSG_DOCKINGDONE:
                             {
-                                if(robot->current_state == RECRUITMENT || robot->current_state == INORGANISM)
+                                if(robot->current_state == RECRUITING || robot->current_state == INORGANISM)
                                     robot->docking_done[j] = true;
                             }
                             break;
                         case MSG_INRANGE:
                             {
-                                if(robot->current_state == RECRUITMENT )
+                                if(robot->current_state == RECRUITING )
                                     robot->robot_in_range_replied |= 1 << j;
                             }
                             break;
@@ -1797,12 +1797,12 @@ void StageRobot::PrintStatus()
             std::cout<<") false | ";
     }
     std::cout<<std::endl;
-    std::cout<<"\t recruitment_signal_interval_count : \t\t";
+    std::cout<<"\t recruiting_signal_interval_count : \t\t";
     for(int i=FRONT; i<=LEFT; i++)
-        std::cout<<"("<<side_names[i]<< ") "<<setw(5)<<recruitment_signal_interval_count[i]<<" | ";
+        std::cout<<"("<<side_names[i]<< ") "<<setw(5)<<recruiting_signal_interval_count[i]<<" | ";
     std::cout<<std::endl;
 
-    if(current_state == INORGANISM || current_state == RECRUITMENT)
+    if(current_state == INORGANISM || current_state == RECRUITING)
     {
         if(mytree.Size()>0)
             std::cout<<mytree<<std::endl;
@@ -1815,9 +1815,9 @@ void StageRobot::PrintStatus()
     //std::cout<<"\t organism index : "<<og_index<<std::endl;
     //std::cout<<"\t number of robots in organism : "<<num_robots_inorganism<<std::endl;
     //std::cout<<"\t my id in organism : "<<id_inorganism<<std::endl;
-    //std::cout<<"\t size : "<<testOG[og_index]->sortedRecruitmentNodeList.size()<<std::endl;
+    //std::cout<<"\t size : "<<testOG[og_index]->sortedRecruitingNodeList.size()<<std::endl;
     //if(num_robots_inorganism <testOG[og_index]->sortedNodeList.size())
-    //    std::cout<<"\t recruitment id in organism: "<<testOG[og_index]->sortedRecruitmentNodeList[num_robots_inorganism - 1]->id<<std::endl;
+    //    std::cout<<"\t recruiting id in organism: "<<testOG[og_index]->sortedRecruitingNodeList[num_robots_inorganism - 1]->id<<std::endl;
     //std::cout<<"\t obstacle_return: "<<pos->vis.obstacle_return<<std::endl;
     //PrintProximitySensor();
     //PrintState();

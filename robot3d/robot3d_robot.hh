@@ -43,7 +43,7 @@ class Robot3dRobot:public Robot, public HAL
         virtual void Disassembly();
         virtual void Undocking();
         virtual void Reshaping();
-        virtual void Recruitment();
+        virtual void Recruiting();
         virtual void MacroLocomotion();
 
         virtual void LoadParameters();

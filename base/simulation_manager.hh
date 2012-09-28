@@ -47,8 +47,6 @@ class Parameter
         double K3;
         double S1;
         double S2;
-        int    T_s;
-
 
         //function 3
         double K_r;
@@ -60,6 +58,11 @@ class Parameter
         int server;
         char *host;
         int port;
+
+
+        //timer threshold
+        int recruiting_time;
+        int seeding_time;
 
 };
 

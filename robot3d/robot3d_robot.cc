@@ -256,7 +256,7 @@ void Robot3dRobot::Reshaping()
 {
 }
 
-void Robot3dRobot::Recruitment()
+void Robot3dRobot::Recruiting()
 {
 }
 

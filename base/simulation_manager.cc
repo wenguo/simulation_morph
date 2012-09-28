@@ -114,10 +114,13 @@ bool SimulationManager::LoadParameters(const char * filename)
                 para.Kd = atof( optionfile->GetPropertyValue( prop, 1 ));
                 para.Err = atoi( optionfile->GetPropertyValue( prop, 2 ));
             }
-            if( Morph::CProperty* prop = optionfile->GetProperty( entity, "waiting_time" ) )
-            {
-            }        
 
+            para.seeding_time = optionfile->ReadInt(entity, "seeding_time", 600);
+
+        }
+        else if( strcmp( typestr, "Recruiting" ) == 0 )
+        {
+            para.recruiting_time = optionfile->ReadInt(entity, "recruiting_time", 0);
         }
         else if( strcmp( typestr, "Global" ) == 0 )
         {        
@@ -134,7 +137,6 @@ bool SimulationManager::LoadParameters(const char * filename)
             para.K1 = optionfile->ReadFloat(entity, "K1", 0.01);
             para.K2 = optionfile->ReadFloat(entity, "K2", 0.3);
             para.K3 = optionfile->ReadFloat(entity, "K3", 7.0);
-            para.T_s = optionfile->ReadInt(entity, "T_s", 600);
 
             para.K_r = optionfile->ReadFloat(entity, "K_r", 1);
             para.k = optionfile->ReadFloat(entity, "k", 0.3);

@@ -56,7 +56,7 @@ class StageRobot:public Robot, public Visualizer
         virtual void Disassembly();
         virtual void Undocking();
         virtual void Reshaping();
-        virtual void Recruitment();
+        virtual void Recruiting();
         virtual void MacroLocomotion();
 
         virtual void LoadParameters();

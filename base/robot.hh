@@ -30,13 +30,13 @@ namespace Morph
 #define NUM_LIGHTS                     8        //number of lightdetector
 #define NUM_IRS                        8        //number of ir proximity sensor
 
-#define RECRUITMENT_SIGNAL_INTERVAL     10
-#define DEFAULT_RECRUITMENT_COUNT       150
+#define RECRUITING_SIGNAL_INTERVAL     10
+#define DEFAULT_RECRUITING_COUNT       150
 #define DEFAULT_DOCKING_COUNT           20
 #define DEFAULT_UNDOCKING_COUNT         30
 #define DEFAULT_ORGANISM_COUNT          250 //simulates the duration the robots will be in Organism mode
 #define DEFAULT_ASSEMBLY_COUNT          1200 //120 seconds -- 2 minutes
-#define DEFAULT_RECRUITMENT_WAIT_COUNT  2400 //4 minutes
+#define DEFAULT_RECRUITING_WAIT_COUNT  2400 //4 minutes
 #define DEFAULT_FORAGING_BLIND_COUNT  100 //10 seconds period when robot doesn't repond to the wall or barrier objects encontered
 #define MSG_ASSEMBLY_INFO_REQ           'a'
 #define MSG_INRANGE                     'b'
@@ -54,7 +54,7 @@ namespace Morph
 #define MSG_RESHAPING        "Reshaping"
 
 
-    enum fsm_state_t {EXPLORING = 0, RESTING, SEEDING, FORAGING, ASSEMBLY, LOCATEENERGY, LOCATEBEACON, ALIGNMENT, RECOVER, DOCKING, DISASSEMBLY, UNDOCKING, RESHAPING, INORGANISM, RECRUITMENT, MACROLOCOMOTION, STATE_COUNT};
+    enum fsm_state_t {EXPLORING = 0, RESTING, SEEDING, FORAGING, ASSEMBLY, LOCATEENERGY, LOCATEBEACON, ALIGNMENT, RECOVER, DOCKING, DISASSEMBLY, UNDOCKING, RESHAPING, INORGANISM, RECRUITING, MACROLOCOMOTION, STATE_COUNT};
     extern const char* state_names[STATE_COUNT];
     enum robot_mode_t {SWARM, ORGANISM};
     enum ir_pos_t {FR=0, RF, RB, BR, BL, LB, LF, FL}; //F -- FRONT, R -- RIGHT, B-- BACK, L--LEFT
@@ -107,7 +107,7 @@ namespace Morph
         virtual void Disassembly();
         virtual void Undocking();
         virtual void Reshaping();
-        virtual void Recruitment();
+        virtual void Recruiting();
         virtual void MacroLocomotion();
 
         virtual void LoadParameters()=0;
@@ -143,7 +143,7 @@ namespace Morph
         static void Disassembly(Robot * robot){robot->Disassembly();}
         static void Undocking(Robot * robot){robot->Undocking();}
         static void Reshaping(Robot * robot){robot->Reshaping();}
-        static void Recruitment(Robot * robot){robot->Recruitment();}
+        static void Recruiting(Robot * robot){robot->Recruiting();}
         static void MacroLocomotion(Robot * robot){robot->MacroLocomotion();}
         int RegisterBehaviour(robot_callback_t fnp, fsm_state_t state);
         robot_callback_t behaviours[STATE_COUNT];
@@ -174,17 +174,17 @@ namespace Morph
         bool organism_formed;
 
         int32_t recover_count;
-        int32_t recruitment_signal_interval_count[NUM_DOCKS];
-        int32_t recruitment_count[NUM_DOCKS];
+        int32_t recruiting_signal_interval_count[NUM_DOCKS];
+        int32_t recruiting_count[NUM_DOCKS];
         int32_t docking_count;
         int32_t inorganism_count;
         int32_t undocking_count; //step for undocking, i.e. open connectors and wait a few steps
-        int32_t assembly_count;  //how long the robot detected last recruitment signals
+        int32_t assembly_count;  //how long the robot detected last recruiting signals
         int32_t seeding_count;
         int32_t foraging_blind_count;
 
         uint8_t beacon_signals_detected;
-        uint8_t recruitment_signals_detected;
+        uint8_t recruiting_signals_detected;
         uint8_t expelling_signals_detected;
         uint8_t robot_in_range_replied;
         uint8_t msg_undocked_received; //undocking message
@@ -192,7 +192,7 @@ namespace Morph
 
         bool shape_completed;
         unsigned char newrobot_attached; //indicating new robot joined the organism, used to propagate the message to the whole organism
-        bool docking_done_syn; // recived docking done synchronisation signals (new id, or subtree, or stop growing instruction) from the robot in organism, which is in recruitment state previously
+        bool docking_done_syn; // recived docking done synchronisation signals (new id, or subtree, or stop growing instruction) from the robot in organism, which is in recruiting state previously
         bool assembly_info_checked;
 
         int32_t leftwheel;
