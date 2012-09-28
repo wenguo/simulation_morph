@@ -108,6 +108,18 @@ class SimulationManager
         pthread_mutex_unlock(&mutex);
         return the_instance;
     }
+    
+    inline static int getBusIndex()
+    {   
+        static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+        static int bus_index=0;
+        pthread_mutex_lock(&mutex);
+            bus_index++;
+        pthread_mutex_unlock(&mutex);
+        return bus_index;
+
+
+    }
     void AddRobot(void *robot);
 
     void logState(long ts, int state);

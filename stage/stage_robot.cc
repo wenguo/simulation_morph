@@ -368,7 +368,7 @@ void StageRobot::Seeding()
 
         //be the first node added into the communication bus
         //create a new communication bus
-        bus_id = time(NULL);
+        bus_id = SimulationManager::getBusIndex();//time(NULL);
         com_bus = new CommunicationBus(bus_id, mytree.Edges()+1);
         sm->busList.push_back(com_bus);
         com_bus->addCommunicationNode(this);
@@ -435,13 +435,13 @@ void StageRobot::Foraging()
 
 
     //to state Resting
-    /*
+    
     if(powerpack && powerpack->ProportionRemaining() < para->E_critical)
     {
         current_state = RESTING;
         last_state = FORAGING;
         return;
-    }*/
+    }
 
     if(powersource_found)
     {
@@ -982,12 +982,26 @@ void StageRobot::Disassembly()
     {
         for (int i = 0; i < SIDE_COUNT; i++)
         {
-            if (docked[i]==true)
+            //open all docking units, no matter it is already opened or not
+          //  if (docked[i]==true)
             {
                 docking_units[i]->SetActive(true);
                 docking_units[i]->CommandOpen();
-                break;
+          //      break;
             }
+
+            //reset some variables TODO: add more here?
+            recruitment_count[i]=0;
+            docking_done[i]=0;
+            blackboard.clear();
+
+            while(!blackboard.empty())
+            {
+                Message * message = blackboard.back(); 
+                delete message;
+                blackboard.pop_back();
+            }
+
         }
 
         undocking_count = DEFAULT_UNDOCKING_COUNT;
@@ -1156,7 +1170,6 @@ void StageRobot::Recruitment()
             if ( f3(it1->Edges(), recruitment_count[index]) - para->S3 > 1e-6)
             {
 
-                recruitment_count[index]=0;
                 //stop flashing, be prepared for undocking
                 //disable all connector_return
                 for(int i=0;i<SIDE_COUNT;i++)
